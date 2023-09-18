@@ -28,4 +28,7 @@ H1[0,0]=ep1
 
 H=H0 + H1
 
-print(H)
+#print(H)
+
+print(np.linalg.eig(H0))
+
