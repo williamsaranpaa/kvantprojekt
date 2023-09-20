@@ -1,6 +1,22 @@
 A repo for using in the project in quantum mechanics FMFF15
+# working with git #
+Allways start with a 
+```
+git status
+```
+if your working tree is fine, no files modified, do a 
 
-# Start up #
+```
+git pull
+```
+
+then work away, when you feel finished for the day write 
+```
+git add -A
+git commit -m "_ something to describe what you've done_"
+git push
+```
+##  Start up # #
 
 To run, open a terminal and go into a directory(cd home/_dir/) where you want to have the project.
 
