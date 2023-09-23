@@ -1,5 +1,7 @@
 import numpy as np
 import matplotlib.pyplot as plt
+from matplotlib.animation import FuncAnimation
+import time
 
 L=6
 V=-1
@@ -29,40 +31,73 @@ H1[0,0]=ep1
 H=H0 + H1
 
 #print(H)H1[0,0]=ep1H1[0,0]=ep1
-eig=np.linalg.eig(H0)
-eigVal=eig.eigenvalues
-eigVec=eig.eigenvectors
-print(eigVec)
+eig1=np.linalg.eig(H0)
+eigVal1=eig1.eigenvalues
+eigVec1=eig1.eigenvectors
+eig2=np.linalg.eig(H)
+eigVal2=eig2.eigenvalues
+eigVec2=eig2.eigenvectors
+#print(eigVec)
 
-E0idx=np.where(eigVal==min(eigVal))
-E0vec=eigVec[E0idx][0]
+#E0idx=np.where(eigVal==min(eigVal))
+#E0vec=eigVec[E0idx][0]
 #print(E0vec)
-print('\n')
-print(eig)
-print(eigVec[0])
-t=0
-Psi0 = np.empty((0))
-for n in range(L):
-    psi=0+0j
-    for i in range(L):
-        tempPsi=np.exp(-eigVal[i]*t*1j)*eigVec[i][n]
-        tempPsi2=0
-        for k in range(L):
-            tempPsi2=tempPsi2 + eigVec[i][k]*eigVec[0][n]
-        psi=psi+tempPsi*tempPsi2
-    print(psi)
-    Psi0=np.append(Psi0, [psi], 0)
-    print(Psi0)
+# print('\n')
+# print(eig)
+# print(eigVec[0])
+
+Psi=np.zeros((20, 6), dtype=np.cfloat)
+PsiN=np.zeros((6), dtype=np.cfloat)
+#Psi0 = np.empty((0))
+for t in range(20):
+    if t==0:
+        eigVal=eigVal1
+        eigVec=eigVec1
+    else:
+        eigVal=eigVal2
+        eigVec=eigVec2
+    for n in range(L):
+        psi=0+0j
+        for i in range(L):
+            tempPsi=np.exp(-eigVal[i]*t*1j)*eigVec[i][n]
+            tempPsi2=0
+            for k in range(L):
+                tempPsi2=tempPsi2 + eigVec[i][k]*eigVec[0][k]
+            psi=psi+tempPsi*tempPsi2
+    #print(psi)
+        PsiN[n]=psi
+    Psi[t]=PsiN
+    #print(Psi0)
 
 print('\n')
-sum=0
-for i in range(len(Psi0)):
-    sum=sum+Psi0[i]**2
-print(sum)
-print(Psi0)
+print(Psi)
+#print(Psi.ndim)
+    #animate(t, Psi)
 
+psiN=np.square(np.absolute(Psi))
+print(psiN)
+x=np.arange(0,6)
+t= np.arange(0,20)
+#psin=Psi[t, :]
+ax = plt.axes(projection ='3d')
 
-Psi0=Psi0*Psi0
-x=np.arange(0, 6)
-plt.plot(x, Psi0)
+ax.contour3D(x, t, psiN, 50)
+ax.set_xlabel('x')
+ax.set_ylabel('t')
+ax.set_zlabel('|psi|²')
+ax.set_title('probability distribution change')
+#plt.plot(x, np.square(np.cos(x*np.pi/6))*(2/np.sqrt(6)))
 plt.show()
+
+# for t in range(20):
+#     psiN=np.square(np.absolute(Psi[t]))
+# # Psi0=np.square(np.absolute(Psi0))
+#     x=np.arange(0,6)
+# # x=np.arange(0, 6)
+#     plt.plot(x, psiN)
+#     plt.show()
+#     print('done')
+#     time.sleep(0.5)
+#     plt.cla()
+
+
