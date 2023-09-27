@@ -3,9 +3,13 @@ import matplotlib.pyplot as plt
 from matplotlib.animation import FuncAnimation
 import time
 
-L=6
+L=3**2 #alla möjligeheter för 2 elektoren att var på ger ^2
 V=-1
-ep1=-2
+ep1=-15 #might be 5 later
+eps=0
+U1=0
+U=15
+
 #t from 0 to 20
 
 
@@ -13,17 +17,35 @@ ep1=-2
 H0 = np.zeros((L, L))
 
 for i in range(L):
+    
     if i+1<=L-1:
         H0[i, i+1]=V
     if i-1>=0:
         H0[i, i-1]=V
+    if i-3>=0:
+        H0[i-3][i]=V
+    if i+3<L:
+        H0[i+3][i]=V
+    if(i<np.sqrt(L)):
+        if(i==0):
+            H0[i][i]=2*ep1
+        else:
+            H0[i][i]=ep1
+    else:
+        if(i%np.sqrt(L)==0):
+            H0[i][i]=ep1
+            if(i-1!=0):
+                H0[i-1][i]=0
+                H0[i][i-1]=0
 
+       
 #print(H0)
 #print('\n')
 
 # initialising the hamiltonian for times larger than 0
 # H1 is just the value eps1 on the the site (0,0)
 # H is H0 + H1
+print(H0)
 H1 = np.zeros((L,L))
 
 H1[0,0]=ep1
