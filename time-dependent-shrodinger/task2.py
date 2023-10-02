@@ -3,12 +3,12 @@ import matplotlib.pyplot as plt
 from matplotlib.animation import FuncAnimation
 import time
 
-L=3**2 #alla möjligeheter för 2 elektoren att var på ger ^2
-V=-1
-ep1=-15 #might be 5 later
-eps=0
-U1=0
-U=15
+L=3**2      #Chosen Accuracyalla of the simulation,^2 for the dubbel elctorn condition.
+V=-1        
+ep1=-15     #might be 5 later
+eps=0       #on site energies, 0 for all exept first
+U1=0        #interference, fro n=1
+U=15        #interference for all els
 
 #t from 0 to 20
 
@@ -18,7 +18,7 @@ H0 = np.zeros((L, L))
 
 for i in range(L):
     
-    if i+1<=L-1:
+    if i+1<=L-1:        #add V to diagnoal off center  
         H0[i, i+1]=V
     if i-1>=0:
         H0[i, i-1]=V
@@ -26,13 +26,14 @@ for i in range(L):
         H0[i-3][i]=V
     if i+3<L:
         H0[i+3][i]=V
-    if(i<np.sqrt(L)):
+    
+    if(i<np.sqrt(L)):   #add the onsite energies
         if(i==0):
             H0[i][i]=2*ep1
         else:
             H0[i][i]=ep1
     else:
-        if(i%np.sqrt(L)==0):
+        if(i%np.sqrt(L)==0):    #"remove" V befre line
             H0[i][i]=ep1
             if(i-1!=0):
                 H0[i-1][i]=0
