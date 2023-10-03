@@ -4,6 +4,8 @@ from matplotlib.animation import FuncAnimation
 import time
 
 L=6
+Time=np.arange(0, 20, 1000)
+T=len(Time)
 V=-1
 ep1=-2
 #t from 0 to 20
@@ -38,18 +40,31 @@ eig2=np.linalg.eig(H)
 eigVal2=eig2.eigenvalues
 eigVec2=eig2.eigenvectors
 #print(eigVec)
+# print(H0)
 
-#E0idx=np.where(eigVal==min(eigVal))
-#E0vec=eigVec[E0idx][0]
-#print(E0vec)
+# print(eigVal1)
+# print('\n')
+E0idx=np.where(eigVal1==min(eigVal1))
+E0vec=eigVec1[:, E0idx[0][0]]
+# print(eig1)
+# print(E0idx[0][0])
+# print('\n')
+# print(np.square(E0vec))
+# sum=0
+# sum2=0
+# for i in range(6):
+#     sum +=E0vec[i]**2
+#     sum2+=np.square(E0vec)[i]
+# print(sum)
+# print(sum2)
 # print('\n')
 # print(eig)
 # print(eigVec[0])
 
-Psi=np.zeros((20, 6), dtype=np.cfloat)
-PsiN=np.zeros((6), dtype=np.cfloat)
+Psi=np.zeros((T, L), dtype=np.cfloat)
+PsiN=np.zeros((L), dtype=np.cfloat)
 #Psi0 = np.empty((0))
-for t in range(20):
+for t in range(T):
     if t==0:
         eigVal=eigVal1
         eigVec=eigVec1
@@ -59,33 +74,39 @@ for t in range(20):
     for n in range(L):
         psi=0+0j
         for i in range(L):
-            tempPsi=np.exp(-eigVal[i]*t*1j)*eigVec[i][n]
+            tempPsi=np.exp(-eigVal[i]*Time[t]*1j)*eigVec[n][i]
             tempPsi2=0
             for k in range(L):
-                tempPsi2=tempPsi2 + eigVec[i][k]*eigVec[0][k]
+                tempPsi2=tempPsi2 + eigVec[k][i]*E0vec[k]
             psi=psi+tempPsi*tempPsi2
     #print(psi)
         PsiN[n]=psi
     Psi[t]=PsiN
     #print(Psi0)
 
-print('\n')
-print(Psi)
+#print('\n')
+#print(Psi)
 #print(Psi.ndim)
     #animate(t, Psi)
 
 psiN=np.square(np.absolute(Psi))
-print(psiN)
-x=np.arange(0,6)
-t= np.arange(0,20)
-#psin=Psi[t, :]
-ax = plt.axes(projection ='3d')
+#print(psiN)
+x=np.arange(0,L)
+#t= np.arange(0,T)
+#print(np.shape(psiN))
+#print(len(psiN[:,0]))
+plt.plot(Time, psiN[:, 0])
 
-ax.contour3D(x, t, psiN, 50)
-ax.set_xlabel('x')
-ax.set_ylabel('t')
-ax.set_zlabel('|psi|²')
-ax.set_title('probability distribution change')
+#####plt.plot(x, np.square(E0vec))
+
+#psin=Psi[t, :]
+# ax = plt.axes(projection ='3d')
+
+# ax.contour3D(x, t, psiN, 50)
+# ax.set_xlabel('x')
+# ax.set_ylabel('t')
+# ax.set_zlabel('|psi|²')
+# ax.set_title('probability distribution change')
 #plt.plot(x, np.square(np.cos(x*np.pi/6))*(2/np.sqrt(6)))
 plt.show()
 
