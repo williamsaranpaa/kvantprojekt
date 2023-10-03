@@ -4,7 +4,7 @@ from matplotlib.animation import FuncAnimation
 import time
 
 L=6
-Time=np.arange(0, 20, 1000)
+Time=np.arange(0, 20, 20/1000)
 T=len(Time)
 V=-1
 ep1=-2
@@ -88,7 +88,7 @@ for t in range(T):
 #print(Psi)
 #print(Psi.ndim)
     #animate(t, Psi)
-
+print(Time)
 psiN=np.square(np.absolute(Psi))
 #print(psiN)
 x=np.arange(0,L)
