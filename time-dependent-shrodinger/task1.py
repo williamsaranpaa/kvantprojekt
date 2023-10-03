@@ -88,14 +88,64 @@ for t in range(T):
 #print(Psi)
 #print(Psi.ndim)
     #animate(t, Psi)
-print(Time)
+#print(Time)
 psiN=np.square(np.absolute(Psi))
 #print(psiN)
 x=np.arange(0,L)
 #t= np.arange(0,T)
 #print(np.shape(psiN))
 #print(len(psiN[:,0]))
-plt.plot(Time, psiN[:, 0])
+
+#Ploting the particle desity for 6 sites dependet on time.
+# Creating subplots
+fig, (axs1, axs2, axs3, axs4, axs5, axs6) = plt.subplots(6, 1, figsize = (8, 7))
+
+# Plotting of the first subplot
+axs1.plot(Time, psiN[:, 0], 'r', label = 'Site 1')
+axs1.set_xlabel('Time')
+axs1.set_ylabel('|psi|² \n Site 1')     #Är detta nödvändigt?
+axs1.legend()
+
+# Plotting of the second subplot
+axs2.plot(Time, psiN[:, 1], 'b', label = 'Site 2')
+axs2.set_xlabel('Time')
+axs2.set_ylabel('|psi|²')
+axs2.legend()
+
+# Plotting of the second subplot
+axs3.plot(Time, psiN[:, 2], 'g', label = 'Site 3')
+axs3.set_xlabel('Time')
+axs3.set_ylabel('|psi|²')
+axs3.legend()
+
+# Plotting of the second subplot
+axs4.plot(Time, psiN[:, 3], 'r', label = 'Site 4')
+axs4.set_xlabel('Time')
+axs4.set_ylabel('|psi|²')
+axs4.legend()
+
+# Plotting of the second subplot
+axs5.plot(Time, psiN[:, 4], 'b', label = 'Site 5')
+axs5.set_xlabel('Time')
+axs5.set_ylabel('|psi|²')
+axs5.legend()
+
+# Plotting of the second subplot
+axs6.plot(Time, psiN[:, 5], 'g', label = 'Site 6')
+axs6.set_xlabel('Time')
+axs6.set_ylabel('|psi|²')
+axs6.legend()
+
+# for adjusting the space between subplots
+plt.tight_layout()
+# Displaying all plots
+plt.show()
+
+#LIlly dum dum 
+#: är allt A[0] =rade A[:, 0]=kolumen
+# poltte A[:, n]=kolumen n = 0-->5 i olia sublot mot time
+#plt.plot(Time, psiN[:, 0]) #det är detta js ska plotta i oloka subplots 
+
 
 #####plt.plot(x, np.square(E0vec))
 
@@ -108,7 +158,7 @@ plt.plot(Time, psiN[:, 0])
 # ax.set_zlabel('|psi|²')
 # ax.set_title('probability distribution change')
 #plt.plot(x, np.square(np.cos(x*np.pi/6))*(2/np.sqrt(6)))
-plt.show()
+#plt.show()
 
 # for t in range(20):
 #     psiN=np.square(np.absolute(Psi[t]))
