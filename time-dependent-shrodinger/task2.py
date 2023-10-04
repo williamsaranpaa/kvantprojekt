@@ -125,7 +125,7 @@ for t in range(T):
     #print(Psi0)
 
 print('\n')
-print(Psi)
+#print(Psi)
 #print(Psi.ndim)
     #animate(t, Psi)
 
@@ -133,48 +133,51 @@ psiN=np.square(np.absolute(Psi))
 
 #x=np.arange(0,L)
 t= np.arange(0,T)
-fig, (axs1, axs2, axs3, axs4, axs5, axs6) = plt.subplots(6, 1, figsize = (8, 7))
 
-# Plotting of the first subplot
-axs1.plot(Time, psiN[:, 0], 'r', label = 'Site 1')
-axs1.set_xlabel('Time')
-axs1.set_ylabel('|psi|² \n Site 1')     #Är detta nödvändigt?
-axs1.legend()
 
-# Plotting of the second subplot
-axs2.plot(Time, psiN[:, 6+1], 'b', label = 'Site 2')
-axs2.set_xlabel('Time')
-axs2.set_ylabel('|psi|²')
-axs2.legend()
 
-# Plotting of the second subplot
-axs3.plot(Time, psiN[:, 12+2], 'g', label = 'Site 3')
-axs3.set_xlabel('Time')
-axs3.set_ylabel('|psi|²')
-axs3.legend()
+# #Ploting the particle desity for 6 sites dependet on time.
+# plt.plot(Time, psiN[:, 0], color='r', label='site 1')
+# plt.plot(Time, psiN[:, 7], color='b', label='site 2')
+# plt.plot(Time, psiN[:, 14], color='g', label='site 3')
+# plt.plot(Time, psiN[:, 21], color='c', label='site 4')
+# plt.plot(Time, psiN[:, 28], color='m', label='site 5')
+# plt.plot(Time, psiN[:, 35], color='y', label='ste 6')
 
-# Plotting of the second subplot
-axs4.plot(Time, psiN[:, 18+3], 'r', label = 'Site 4')
-axs4.set_xlabel('Time')
-axs4.set_ylabel('|psi|²')
-axs4.legend()
+# # Naming the x-axis, y-axis and the whole graph
+# plt.xlabel("Time")
+# plt.ylabel("|psi|²")
+# plt.title("Density in the different states dependent on time when the electrons are at the same site")
+# psi1=np.sum(psiN[:, :6], axis=1)
+# #print(psi1)
+# print('\n')
+# psi11=np.zeros(1000)
+# for i in range(6):
+#     psi11+=psiN[:, i]
+# #print(psi11)
+# print('\n')
+# print(psi1-psi11)
+# print(np.size(psi1))
+# print(np.size(psi11))
 
-# Plotting of the second subplot
-axs5.plot(Time, psiN[:, 24+4], 'b', label = 'Site 5')
-axs5.set_xlabel('Time')
-axs5.set_ylabel('|psi|²')
-axs5.legend()
+#Ploting the particle desity for 6 sites dependet on time.
+plt.plot(Time, np.sum(psiN[:, :6], axis=1), color='r', label='site 1')
+plt.plot(Time, np.sum(psiN[:, 6:12], axis=1), color='b', label='site 2')
+plt.plot(Time, np.sum(psiN[:, 12:18], axis=1), color='g', label='site 3')
+plt.plot(Time, np.sum(psiN[:, 18:24], axis=1), color='c', label='site 4')
+plt.plot(Time, np.sum(psiN[:, 24:30], axis=1), color='m', label='site 5')
+plt.plot(Time, np.sum(psiN[:, 30:36], axis=1), color='y', label='ste 6')
 
-# Plotting of the second subplot
-axs6.plot(Time, psiN[:, 30+5], 'g', label = 'Site 6')
-axs6.set_xlabel('Time')
-axs6.set_ylabel('|psi|²')
-axs6.legend()
-
-# for adjusting the space between subplots
-plt.tight_layout()
+# Naming the x-axis, y-axis and the whole graph
+plt.xlabel("Time")
+plt.ylabel("|psi|²")
+plt.title("Density in the different states for the spin up electron dependent on time")
+  
+# Adding legend, which helps us recognize the curve according to it's color
+plt.legend()
 # Displaying all plots
 plt.show()
+
 #psin=Psi[t, :]
 # ax = plt.axes(projection ='3d')
 
