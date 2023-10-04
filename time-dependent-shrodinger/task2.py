@@ -4,7 +4,8 @@ from matplotlib.animation import FuncAnimation
 import time
 
 L=6**2      #Chosen Accuracy of the simulation,^2 for the dubbel elctorn condition.
-T=20
+Time=np.arange(0, 20, 20/1000)
+T=1000
 V=-1        
 ep0=-15     #might be 5 later
 eps=5       #on site energies, 0 for all exept first
@@ -78,8 +79,8 @@ for i in range(L):
 # initialising the hamiltonian for times larger than 0
 # H1 is just the value eps1 on the the site (0,0)
 # H is H0 + H1
-print(H0)
-print(H)
+#print(H0)
+# print(H)
 
 
 #print(H)H1[0,0]=ep1H1[0,0]=ep1
@@ -90,6 +91,8 @@ eig2=np.linalg.eig(H)
 eigVal2=eig2.eigenvalues
 eigVec2=eig2.eigenvectors
 #print(eigVec)
+E0idx=np.where(eigVal1==min(eigVal1))
+E0vec=eigVec1[:, E0idx[0][0]]
 
 #E0idx=np.where(eigVal==min(eigVal))
 #E0vec=eigVec[E0idx][0]
@@ -111,10 +114,10 @@ for t in range(T):
     for n in range(L):
         psi=0+0j
         for i in range(L):
-            tempPsi=np.exp(-eigVal[i]*t*1j)*eigVec[i][n]
+            tempPsi=np.exp(-eigVal[i]*Time[t]*1j)*eigVec[n][i]
             tempPsi2=0
             for k in range(L):
-                tempPsi2=tempPsi2 + eigVec[i][k]*eigVec[0][k]
+                tempPsi2=tempPsi2 + eigVec[k][i]*E0vec[k]
             psi=psi+tempPsi*tempPsi2
     #print(psi)
         PsiN[n]=psi
@@ -127,19 +130,61 @@ print(Psi)
     #animate(t, Psi)
 
 psiN=np.square(np.absolute(Psi))
-print(psiN)
-x=np.arange(0,L)
-t= np.arange(0,T)
-#psin=Psi[t, :]
-ax = plt.axes(projection ='3d')
 
-ax.contour3D(x, t, psiN, 100)
-ax.set_xlabel('x')
-ax.set_ylabel('t')
-ax.set_zlabel('|psi|²')
-ax.set_title('probability distribution change')
-#plt.plot(x, np.square(np.cos(x*np.pi/6))*(2/np.sqrt(6)))
+#x=np.arange(0,L)
+t= np.arange(0,T)
+fig, (axs1, axs2, axs3, axs4, axs5, axs6) = plt.subplots(6, 1, figsize = (8, 7))
+
+# Plotting of the first subplot
+axs1.plot(Time, psiN[:, 0], 'r', label = 'Site 1')
+axs1.set_xlabel('Time')
+axs1.set_ylabel('|psi|² \n Site 1')     #Är detta nödvändigt?
+axs1.legend()
+
+# Plotting of the second subplot
+axs2.plot(Time, psiN[:, 6+1], 'b', label = 'Site 2')
+axs2.set_xlabel('Time')
+axs2.set_ylabel('|psi|²')
+axs2.legend()
+
+# Plotting of the second subplot
+axs3.plot(Time, psiN[:, 12+2], 'g', label = 'Site 3')
+axs3.set_xlabel('Time')
+axs3.set_ylabel('|psi|²')
+axs3.legend()
+
+# Plotting of the second subplot
+axs4.plot(Time, psiN[:, 18+3], 'r', label = 'Site 4')
+axs4.set_xlabel('Time')
+axs4.set_ylabel('|psi|²')
+axs4.legend()
+
+# Plotting of the second subplot
+axs5.plot(Time, psiN[:, 24+4], 'b', label = 'Site 5')
+axs5.set_xlabel('Time')
+axs5.set_ylabel('|psi|²')
+axs5.legend()
+
+# Plotting of the second subplot
+axs6.plot(Time, psiN[:, 30+5], 'g', label = 'Site 6')
+axs6.set_xlabel('Time')
+axs6.set_ylabel('|psi|²')
+axs6.legend()
+
+# for adjusting the space between subplots
+plt.tight_layout()
+# Displaying all plots
 plt.show()
+#psin=Psi[t, :]
+# ax = plt.axes(projection ='3d')
+
+# ax.contour3D(x, t, psiN, 100)
+# ax.set_xlabel('x')
+# ax.set_ylabel('t')
+# ax.set_zlabel('|psi|²')
+# ax.set_title('probability distribution change')
+#plt.plot(x, np.square(np.cos(x*np.pi/6))*(2/np.sqrt(6)))
+
 
 # for t in range(20):
 #     psiN=np.square(np.absolute(Psi[t]))

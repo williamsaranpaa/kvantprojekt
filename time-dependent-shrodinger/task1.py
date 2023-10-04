@@ -95,7 +95,8 @@ x=np.arange(0,L)
 #t= np.arange(0,T)
 #print(np.shape(psiN))
 #print(len(psiN[:,0]))
-
+# plt.plot(x, np.square(E0vec))
+# plt.show()
 #Ploting the particle desity for 6 sites dependet on time.
 # Creating subplots
 fig, (axs1, axs2, axs3, axs4, axs5, axs6) = plt.subplots(6, 1, figsize = (8, 7))
