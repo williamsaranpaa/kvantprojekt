@@ -97,55 +97,24 @@ x=np.arange(0,L)
 #print(len(psiN[:,0]))
 # plt.plot(x, np.square(E0vec))
 # plt.show()
+
 #Ploting the particle desity for 6 sites dependet on time.
-# Creating subplots
-fig, (axs1, axs2, axs3, axs4, axs5, axs6) = plt.subplots(6, 1, figsize = (8, 7))
+plt.plot(Time, psiN[:, 0], color='r', label='site 1')
+plt.plot(Time, psiN[:, 1], color='b', label='site 2')
+plt.plot(Time, psiN[:, 2], color='g', label='site 3')
+plt.plot(Time, psiN[:, 3], color='c', label='site 4')
+plt.plot(Time, psiN[:, 4], color='m', label='site 5')
+plt.plot(Time, psiN[:, 5], color='y', label='ste 6')
 
-# Plotting of the first subplot
-axs1.plot(Time, psiN[:, 0], 'r', label = 'Site 1')
-axs1.set_xlabel('Time')
-axs1.set_ylabel('|psi|² \n Site 1')     #Är detta nödvändigt?
-axs1.legend()
-
-# Plotting of the second subplot
-axs2.plot(Time, psiN[:, 1], 'b', label = 'Site 2')
-axs2.set_xlabel('Time')
-axs2.set_ylabel('|psi|²')
-axs2.legend()
-
-# Plotting of the second subplot
-axs3.plot(Time, psiN[:, 2], 'g', label = 'Site 3')
-axs3.set_xlabel('Time')
-axs3.set_ylabel('|psi|²')
-axs3.legend()
-
-# Plotting of the second subplot
-axs4.plot(Time, psiN[:, 3], 'r', label = 'Site 4')
-axs4.set_xlabel('Time')
-axs4.set_ylabel('|psi|²')
-axs4.legend()
-
-# Plotting of the second subplot
-axs5.plot(Time, psiN[:, 4], 'b', label = 'Site 5')
-axs5.set_xlabel('Time')
-axs5.set_ylabel('|psi|²')
-axs5.legend()
-
-# Plotting of the second subplot
-axs6.plot(Time, psiN[:, 5], 'g', label = 'Site 6')
-axs6.set_xlabel('Time')
-axs6.set_ylabel('|psi|²')
-axs6.legend()
-
-# for adjusting the space between subplots
-plt.tight_layout()
+# Naming the x-axis, y-axis and the whole graph
+plt.xlabel("Time")
+plt.ylabel("|psi|²")
+plt.title("Density in the different states dependent on time")
+  
+# Adding legend, which helps us recognize the curve according to it's color
+plt.legend()
 # Displaying all plots
 plt.show()
-
-#LIlly dum dum 
-#: är allt A[0] =rade A[:, 0]=kolumen
-# poltte A[:, n]=kolumen n = 0-->5 i olia sublot mot time
-#plt.plot(Time, psiN[:, 0]) #det är detta js ska plotta i oloka subplots 
 
 
 #####plt.plot(x, np.square(E0vec))
