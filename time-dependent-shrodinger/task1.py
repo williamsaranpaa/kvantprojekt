@@ -7,7 +7,7 @@ L=6
 Time=np.arange(0, 20, 20/1000)
 T=len(Time)
 V=-1
-ep1=-2
+ep1=2
 #t from 0 to 20
 
 

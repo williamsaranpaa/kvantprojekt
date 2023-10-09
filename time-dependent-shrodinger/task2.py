@@ -7,10 +7,10 @@ L=6**2      #Chosen Accuracy of the simulation,^2 for the dubbel elctorn conditi
 Time=np.arange(0, 20, 20/1000)
 T=1000
 V=-1        
-ep0=-15     #might be 5 later
-eps=5       #on site energies, 0 for all exept first
-U1=0        #interference, fro n=1
-U=15        #interference for all els
+ep0=-15     #might be -15 later
+eps=15    #on site energies, 0 for all exept first 5 or 15
+U1=0        #interference, fro n=1s
+U=15         #interference for all els
 
 #t from 0 to 20
 
@@ -80,7 +80,8 @@ for i in range(L):
 # H1 is just the value eps1 on the the site (0,0)
 # H is H0 + H1
 #print(H0)
-# print(H)
+for i in range (len(H[0])):
+    print(H[i])
 
 
 #print(H)H1[0,0]=ep1H1[0,0]=ep1
@@ -136,7 +137,7 @@ t= np.arange(0,T)
 
 
 
-# #Ploting the particle desity for 6 sites dependet on time.
+# # #Ploting the particle desity for 6 sites dependet on time.
 # plt.plot(Time, psiN[:, 0], color='r', label='site 1')
 # plt.plot(Time, psiN[:, 7], color='b', label='site 2')
 # plt.plot(Time, psiN[:, 14], color='g', label='site 3')
@@ -144,10 +145,10 @@ t= np.arange(0,T)
 # plt.plot(Time, psiN[:, 28], color='m', label='site 5')
 # plt.plot(Time, psiN[:, 35], color='y', label='ste 6')
 
-# # Naming the x-axis, y-axis and the whole graph
+# # # # Naming the x-axis, y-axis and the whole graph
 # plt.xlabel("Time")
 # plt.ylabel("|psi|²")
-# plt.title("Density in the different states dependent on time when the electrons are at the same site")
+# plt.title("Density in the different states dependent on time for double occupancy")
 # psi1=np.sum(psiN[:, :6], axis=1)
 # #print(psi1)
 # print('\n')
@@ -168,12 +169,12 @@ plt.plot(Time, np.sum(psiN[:, 18:24], axis=1), color='c', label='site 4')
 plt.plot(Time, np.sum(psiN[:, 24:30], axis=1), color='m', label='site 5')
 plt.plot(Time, np.sum(psiN[:, 30:36], axis=1), color='y', label='ste 6')
 
-# Naming the x-axis, y-axis and the whole graph
+# # Naming the x-axis, y-axis and the whole graph
 plt.xlabel("Time")
 plt.ylabel("|psi|²")
 plt.title("Density in the different states for the spin up electron dependent on time")
   
-# Adding legend, which helps us recognize the curve according to it's color
+# # Adding legend, which helps us recognize the curve according to it's color
 plt.legend()
 # Displaying all plots
 plt.show()
