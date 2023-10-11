@@ -180,7 +180,7 @@ plt.title("Density in the different states dependent on time when the electrons 
 # plt.ylabel("|psi|²")
 # plt.title("Density in the different states for the spin up electron dependent on time")
   
-# Adding legend, which helps us recognize the curve according to it's color
+# # Adding legend, which helps us recognize the curve according to it's color
 plt.legend()
 # Displaying all plots
 plt.show()
