@@ -7,7 +7,7 @@ L=6
 Time=np.arange(0, 20, 20/1000)
 T=len(Time)
 V=-1
-ep1=-2
+ep1=2
 #t from 0 to 20
 
 
@@ -97,14 +97,14 @@ x=np.arange(0,L)
 #print(len(psiN[:,0]))
 # plt.plot(x, np.square(E0vec))
 # plt.show()
-
+print(psiN[:, 0])
 #Ploting the particle desity for 6 sites dependet on time.
 plt.plot(Time, psiN[:, 0], color='r', label='site 1')
 plt.plot(Time, psiN[:, 1], color='b', label='site 2')
 plt.plot(Time, psiN[:, 2], color='g', label='site 3')
 plt.plot(Time, psiN[:, 3], color='c', label='site 4')
 plt.plot(Time, psiN[:, 4], color='m', label='site 5')
-plt.plot(Time, psiN[:, 5], color='y', label='ste 6')
+plt.plot(Time, psiN[:, 5], color='y', label='site 6')
 
 # Naming the x-axis, y-axis and the whole graph
 plt.xlabel("Time")
