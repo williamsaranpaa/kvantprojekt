@@ -41,7 +41,8 @@ eigVal2=eig2.eigenvalues
 eigVec2=eig2.eigenvectors
 #print(eigVec)
 # print(H0)
-
+print(np.linalg.det(eigVec1))
+print(np.linalg.det(eigVec2))
 # print(eigVal1)
 # print('\n')
 E0idx=np.where(eigVal1==min(eigVal1))
@@ -97,7 +98,8 @@ x=np.arange(0,L)
 #print(len(psiN[:,0]))
 # plt.plot(x, np.square(E0vec))
 # plt.show()
-print(psiN[:, 0])
+print(np.sum(psiN[1, :]))
+print(np.sum(psiN[0, :]))
 #Ploting the particle desity for 6 sites dependet on time.
 plt.plot(Time, psiN[:, 0], color='r', label='site 1')
 plt.plot(Time, psiN[:, 1], color='b', label='site 2')
