@@ -3,15 +3,15 @@ import matplotlib.pyplot as plt
 from matplotlib.animation import FuncAnimation
 import time
 
-L=3**2      #Chosen Accuracy of the simulation,^2 for the dubbel elctorn condition.
-l=3
+L=6**2      #Chosen Accuracy of the simulation,^2 for the dubbel elctorn condition.
+l=6
 Time=np.arange(0, 20, 20/1000)
 T=len(Time)
 V=-1        
-ep0=0     #-15
-eps=2       #on site energies, 0 for all exept first which is 5/15
+ep0=-15     #-15
+eps=-15+22.5       #on site energies, 0 for all exept first which is 5/15
 U1=0        #interference, fro n=1
-U=0        #interference for all els, 15
+U=15        #interference for all els, 15
 
 #t from 0 to 20
 
@@ -117,12 +117,12 @@ eigVec2=eig2.eigenvectors
 E0idx=np.where(eigVal1==min(eigVal1))
 E0vec=eigVec1[:, E0idx[0][0]]
 
-idx = eigVal1.argsort()[::-1]   
-eigVal1=eigVal1[idx]
-eigVec1 = eigVec1[:,idx]
-print(H)
-print(np.linalg.det(eigVec1))
-print(np.linalg.det(eigVec2))
+# idx = eigVal1.argsort()[::-1]   
+# eigVal1=eigVal1[idx]
+# eigVec1 = eigVec1[:,idx]
+# print(H)
+# print(np.linalg.det(eigVec1))
+# print(np.linalg.det(eigVec2))
 #E0idx=np.where(eigVal==min(eigVal))
 #E0vec=eigVec[E0idx][0]
 #print(E0vec)
@@ -140,12 +140,12 @@ for t in range(T):
     else:
         eigVal=eigVal2
         eigVec=eigVec2
-    for n in range(L):
+    for n in range(L): #sites
         psi=0+0j
-        for i in range(L):
+        for i in range(L): #lambda 
             tempPsi=np.exp(-eigVal[i]*Time[t]*1j)*eigVec[n][i]
             tempPsi2=0
-            for k in range(L):
+            for k in range(L): #sites
                 tempPsi2=tempPsi2 + eigVec[k][i]*E0vec[k]
             psi=psi+tempPsi*tempPsi2
     #print(psi)
@@ -159,23 +159,38 @@ for t in range(T):
     #animate(t, Psi)
 
 psiN=np.square(np.absolute(Psi))
+# state1 = np.sum(Psi[:, :l], axis=1)
 
+# psi1=np.square(np.absolute(state1))
+# state2 = np.sum(Psi[:, l:2*l], axis=1)
 
+# psi2=np.square(np.absolute(state2))
+# state3 = np.sum(Psi[:, 2*l:3*l], axis=1)
 
+# psi3=np.square(np.absolute(state3))
+# state4 = np.sum(Psi[:, 3*l:4*l], axis=1)
+
+# psi4=np.square(np.absolute(state4))
+# state5 = np.sum(Psi[:, 4*l:5*l], axis=1)
+
+# psi5=np.square(np.absolute(state5))
+# state6 = np.sum(Psi[:, 5*l:6*l], axis=1)
+
+# psi6=np.square(np.absolute(state6))
 
 #print(H)
-# #Ploting the particle desity for 6 sites dependet on time.
-# plt.plot(Time, psiN[:, 0*l+0], color='r', label='site 1')
-# plt.plot(Time, psiN[:, l+1], color='b', label='site 2')
-# plt.plot(Time, psiN[:, 2*l+2], color='g', label='site 3')
-# plt.plot(Time, psiN[:, 3*l+3], color='c', label='site 4')
-# plt.plot(Time, psiN[:, 4*l+4], color='m', label='site 5')
-# plt.plot(Time, psiN[:, 5*l+5], color='y', label='ste 6')
+#Ploting the particle desity for 6 sites dependet on time.
+plt.plot(Time, psiN[:, 0*l+0], color='r', label='site 1')
+plt.plot(Time, psiN[:, l+1], color='b', label='site 2')
+plt.plot(Time, psiN[:, 2*l+2], color='g', label='site 3')
+plt.plot(Time, psiN[:, 3*l+3], color='c', label='site 4')
+plt.plot(Time, psiN[:, 4*l+4], color='m', label='site 5')
+plt.plot(Time, psiN[:, 5*l+5], color='y', label='ste 6')
 
-# # Naming the x-axis, y-axis and the whole graph
-# plt.xlabel("Time")
-# plt.ylabel("|psi|²")
-# plt.title("Density in the different states dependent on time when the electrons are at the same site")
+# Naming the x-axis, y-axis and the whole graph
+plt.xlabel("Time")
+plt.ylabel("|psi|²")
+plt.title("Density in the different states for double occupancy, eps=7.5")
 # # psi1=np.sum(psiN[:, :6], axis=1)
 # # #print(psi1)
 # print('\n')
@@ -193,22 +208,29 @@ psiN=np.square(np.absolute(Psi))
 #Ploting the particle desity for 6 sites dependet on time.
 #print(np.size(psiN[:, 1]))
 
-print(np.sum(psiN[0, :]))
-print(np.sum(psiN[1, :]))
-print(np.sum(psiN[2, :]))
+# print(np.sum(psiN[0, :]))
+# print(np.sum(psiN[1, :]))
+# print(np.sum(psiN[2, :]))
 # print(np.sum(np.sum(psiN[:l, 0], axis=1)))
 
-plt.plot(Time, np.sum(psiN[:, :l], axis=1), color='r', label='site 1')
-plt.plot(Time, np.sum(psiN[:, l:2*l], axis=1), color='b', label='site 2')
-plt.plot(Time, np.sum(psiN[:, 2*l:3*l], axis=1), color='g', label='site 3')
-plt.plot(Time, np.sum(psiN[:, 3*l:4*l], axis=1), color='c', label='site 4')
-plt.plot(Time, np.sum(psiN[:, 4*l:5*l], axis=1), color='m', label='site 5')
-plt.plot(Time, np.sum(psiN[:, 5*l:6*l], axis=1), color='y', label='ste 6')
+# plt.plot(Time, np.sum(psiN[:, :l], axis=1), color='r', label='site 1')
+# plt.plot(Time, np.sum(psiN[:, l:2*l], axis=1), color='b', label='site 2')
+# plt.plot(Time, np.sum(psiN[:, 2*l:3*l], axis=1), color='g', label='site 3')
+# plt.plot(Time, np.sum(psiN[:, 3*l:4*l], axis=1), color='c', label='site 4')
+# plt.plot(Time, np.sum(psiN[:, 4*l:5*l], axis=1), color='m', label='site 5')
+# plt.plot(Time, np.sum(psiN[:, 5*l:6*l], axis=1), color='y', label='ste 6')
 
-# Naming the x-axis, y-axis and the whole graph
-plt.xlabel("Time")
-plt.ylabel("|psi|²")
-plt.title("Density in the different states for the spin up electron dependent on time")
+# # plt.plot(Time, psi1,  color='r', label='site 1')
+# # plt.plot(Time, psi2,  color='b', label='site 2')
+# # plt.plot(Time, psi3,  color='g', label='site 3')
+# # plt.plot(Time, psi4,  color='c', label='site 4')
+# # plt.plot(Time, psi5,  color='m', label='site 5')
+# # plt.plot(Time, psi6,  color='y', label='ste 6')
+
+# # Naming the x-axis, y-axis and the whole graph
+# plt.xlabel("Time")
+# plt.ylabel("|psi|²")
+# plt.title("Density in the different states for the spin up electron with eps=7.5")
 # plt.plot(Time, psiN[:, 0], color='r', label='site 1')
 # plt.plot(Time, psiN[:, 1], color='b', label='site 2')
 # plt.plot(Time, psiN[:, 2], color='g', label='site 3')
